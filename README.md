@@ -25,6 +25,16 @@ Running
 -------
 `python3.6 manage.py runserver`
 
+Running the test
+-------
+in the root of the project, where the file  manage.py  is located, 
+type:
+```
+python3 manage.py test                
+```
+u will need to type it many times in order to teste different user case
+
+
 Admin
 -----
 
