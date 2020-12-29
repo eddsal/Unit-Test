@@ -1,7 +1,7 @@
 from main.models import *
 import random
 import string
-from datetime import datetime
+import datetime
 
 
 """
@@ -39,13 +39,17 @@ def canCreateList(email):
     return True
 
 
+def timer(self):
+    import time
+    for x in range(self, 0, -1):
+        print("\r %d" % x, end="")
+        time.sleep(1)
+
+
 def add(items):
     maxItem = 11
-    count = 0
     db_items = Items.objects.filter(list_to_do=List.objects.get(
         useraccount=UserAccount.objects.get(email=items['user']))).count()
-    # last_added_item = Items.objects.get(list_to_do=List.objects.get(
-    #     useraccount=UserAccount.objects.get(email=items['user'])))
 
     if items:
         for item in items:
@@ -57,56 +61,48 @@ def add(items):
                     print('max lenght of the content is 1000 charachters. u wrote {}'.format(len(items[item])))
                     return False
     if db_items > 1:
-        db_items = db_items + 1
-        def impaire(x, y): return [n for n in range(db_items, (10 + 1)) if n % 2]
-        array = impaire(db_items, 10)
         date = Items.objects.filter(list_to_do=List.objects.get(
             useraccount=UserAccount.objects.get(email=items['user']))).last().created
-        now = datetime.now()
-        if (len(array) == 4):
-            if int(date.strftime("%M")) - 30 > int(now.strftime("%M")):
-                return True
-            else:
-                print('u created two items in less thn 30 mins')
-                return False
-        elif (len(array) == 3):
-            if int(date.strftime("%M")) - 30 > int(now.strftime("%M")):
-                return True
-            else:
-                print('u created two items in less thn 30 mins')
-                return False
-        elif (len(array) == 2):
-            if int(date.strftime("%M")) - 30 > int(now.strftime("%M")):
-                return True
-            else:
-                print('u created two items in less thn 30 mins')
-                return False
-        elif (len(array) == 1):
-            if int(date.strftime("%M")) - 30 > int(now.strftime("%M")):
-                return True
-            else:
-                print('u created two items in less thn 30 mins')
-                return False
+        created_date = date.strftime('%Y-%m-%d %H:%M:%S').replace(':', ' ').split('-')
+        timer = ' '.join(created_date).split(' ')
+        lst = []
+        for intt in timer:
+            intt = int(intt)
+            lst.append(intt)
 
-        print(array)
+        date_minutes = datetime.datetime.now() - datetime.datetime(lst[0], lst[1], lst[2], lst[3], lst[4], lst[5])
+        minutes = divmod(date_minutes.total_seconds(), 60)
+        # now = datetime.now()
+        if (db_items == 2):
 
-        count + 1
+            if minutes[0] > 30:
+                return True
+            else:
+                print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
+                return False
+        elif (db_items == 4):
+            if minutes[0] > 30:
+                return True
+            else:
+                print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
+                return False
+        elif (db_items == 6):
+
+            if minutes[0] > 30:
+                return True
+            else:
+                print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
+                return False
+        elif (db_items == 8):
+            if minutes[0] > 30:
+                return True
+            else:
+                print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
+                return False
     if db_items - maxItem == 0:
         print('max items in your e list have been reached ')
         return False
 
-    if count == 2:
-        print('3arsa', )
-
-    # # db_items + 1
-    # if db_items:
-
-    #     count += 1
-    #     if count == 2:
-    #         # if
-
-    #         print('max item creation has been acceded try in few minutes')
-
-    #         return False
-
+    if db_items == 8:
+        print('you only can  add 2 more items ')
     return True
