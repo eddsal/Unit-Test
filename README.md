@@ -21,6 +21,13 @@ How to install
 * `sudo python3.6 -m pip install -r requirements.txt`
 
 
+First Run
+---------
+
+* `python3.6 manage.py migrate`
+* Run the server (see above)
+
+
 Running
 -------
 `python3.6 manage.py runserver`
@@ -34,18 +41,9 @@ python3 manage.py test
 ```
 u will need to type it many times in order to teste different user case
 
-
 Admin
 -----
 
 * To create an Admin user: `python3.6 manage.py createsuperuser`
 * Go on the admin url (default: http://127.0.0.1:8000/admin) in order to see the relations between user, list and items
-
-First Run
----------
-
-* `python3.6 manage.py migrate`
-* Run the server (see above)
-
-
 
