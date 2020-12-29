@@ -63,28 +63,26 @@ def add(items):
         date = Items.objects.filter(list_to_do=List.objects.get(
             useraccount=UserAccount.objects.get(email=items['user']))).last().created
         now = datetime.now()
-        FMT = '%H:%M:%S'
-        tdelta = datetime.strptime(date.strftime("%H:%M:%S"), FMT) - datetime.strptime(now.strftime("%H:%M:%S"), FMT)
         if (len(array) == 4):
-            if int(now.strftime("%M")) - 30 == 0 or 30:
+            if int(date.strftime("%M")) - 30 > int(now.strftime("%M")):
                 return True
             else:
                 print('u created two items in less thn 30 mins')
                 return False
         elif (len(array) == 3):
-            if int(now.strftime("%M")) - 30 == 0 or 30:
+            if int(date.strftime("%M")) - 30 > int(now.strftime("%M")):
                 return True
             else:
                 print('u created two items in less thn 30 mins')
                 return False
         elif (len(array) == 2):
-            if int(now.strftime("%M")) - 30 == 0 or 30:
+            if int(date.strftime("%M")) - 30 > int(now.strftime("%M")):
                 return True
             else:
                 print('u created two items in less thn 30 mins')
                 return False
         elif (len(array) == 1):
-            if int(now.strftime("%M")) - 30 == 0 or 30:
+            if int(date.strftime("%M")) - 30 > int(now.strftime("%M")):
                 return True
             else:
                 print('u created two items in less thn 30 mins')
