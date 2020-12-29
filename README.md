@@ -47,3 +47,11 @@ Admin
 * To create an Admin user: `python3.6 manage.py createsuperuser`
 * Go on the admin url (default: http://127.0.0.1:8000/admin) in order to see the relations between user, list and items
 
+
+
+PS
+-----
+functions :
+* isValid()
+* add(items)
+are located in './main/utils.py
