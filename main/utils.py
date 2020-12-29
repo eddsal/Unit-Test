@@ -30,9 +30,6 @@ def isValid(dictt):
                 if '@' not in dictt[i]:
                     print("Invalid Email")
                     return False
-                # else:
-                #     print("Valid Email")
-                #     return True
     return True
 
 
