@@ -1,5 +1,5 @@
 from django.db import models
-import datetime
+from datetime import datetime
 
 # Create your models here.
 
@@ -28,7 +28,7 @@ class Items(models.Model):
     can_create = False
     name = models.CharField(max_length=100, blank=True, null=True, default=None, unique=True)
     content = models.TextField(max_length=1000)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    created = models.DateTimeField(default=datetime.now(), auto_now=False)
     list_to_do = models.ForeignKey(List, on_delete=models.CASCADE)
 
     # def save(self, *args, **kwargs):
