@@ -10,9 +10,18 @@ class LoginViewTest(unittest.TestCase):
 
     def test_create_valid_user(self):
         print('function: test_create_valid_user')
-        data = {'email':  random_char(7)+"@gmail.com", 'age': '13', 'first_name': 'e', 'last_name': 'e', 'password': 'eeeeeeeeeeeeee'}
+        data = {'email': "Admin@test.com", 'age': '13', 'first_name': 'e', 'last_name': 'e', 'password': 'eeeeeeeeeeeeee'}
         if (isValid(data)):
-            UserAccount.objects.create(email=data['email'], age=data['age'], first_name=data['first_name'], last_name=data['last_name'], password=data['password'])
+            print('User is Valid')
+            if (not UserAccount.objects.filter(email=data['email']).exists()):
+                UserAccount.objects.create(email=data['email'], age=data['age'], first_name=data['first_name'], last_name=data['last_name'], password=data['password'])
+                self.assertTrue(data['email'] == UserAccount.objects.last().email)
+                self.assertTrue(int(data['age']) >= 13)
+            else:
+                email = random_char(2)+data['email']
+                UserAccount.objects.create(email=email, age=data['age'], first_name=data['first_name'], last_name=data['last_name'], password=data['password'])
+                self.assertTrue(email == UserAccount.objects.last().email)
+                self.assertTrue(int(data['age']) >= 13)
         print('----------------------------')
         print('')
 

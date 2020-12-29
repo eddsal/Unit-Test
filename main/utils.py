@@ -10,6 +10,8 @@ this function  will return a bool with some infos about the recieved data.
 
 
 def isValid(dictt):
+    import re
+
     for i in dictt:
         if dictt[i] is None or dictt[i] == '':
             print('no value has been set to', i)
@@ -24,6 +26,13 @@ def isValid(dictt):
             if i == 'password' and len(dictt[i]) < 8 or len(dictt[i]) > 40:
                 print("you're password must be betwwen 8 and 40 charcater ")
                 return False
+            if i == 'email':
+                if '@' not in dictt[i]:
+                    print("Invalid Email")
+                    return False
+                # else:
+                #     print("Valid Email")
+                #     return True
     return True
 
 
@@ -74,7 +83,6 @@ def add(items):
         minutes = divmod(date_minutes.total_seconds(), 60)
         # now = datetime.now()
         if (db_items == 2):
-
             if minutes[0] > 30:
                 return True
             else:
