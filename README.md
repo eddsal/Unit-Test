@@ -46,3 +46,6 @@ First Run
 
 * `python3.6 manage.py migrate`
 * Run the server (see above)
+
+
+

@@ -5,7 +5,9 @@ import datetime
 
 
 """
-this function  will return a bool with some infos about the recieved data.
+this function will check if the user we are trying to create is valid
+@param1 = {}
+return True or False
 """
 
 
@@ -33,8 +35,22 @@ def isValid(dictt):
     return True
 
 
+"""
+this function will generate random char
+@param1 = int
+return str
+"""
+
+
 def random_char(y):
     return ''.join(random.choice(string.ascii_letters) for x in range(y))
+
+
+"""
+this function will return a bool if a user can have + 1 list
+@param1 = email
+return bool
+"""
 
 
 def canCreateList(email):
@@ -45,28 +61,33 @@ def canCreateList(email):
     return True
 
 
-def timer(self):
-    import time
-    for x in range(self, 0, -1):
-        print("\r %d" % x, end="")
-        time.sleep(1)
+"""
+this function will return a bool if a user can create items
+
+@param1 = items
+return bool
+"""
 
 
 def add(items):
     maxItem = 11
+
     db_items = Items.objects.filter(list_to_do=List.objects.get(
-        useraccount=UserAccount.objects.get(email=items['user']))).count()
+        useraccount=UserAccount.objects.get(email=items['user']))).count()  # geeting all the users 'list items
 
     if items:
         for item in items:
-            if item == 'name' and Items.objects.filter(name=items[item]).exists():
+            if item == 'name' and Items.objects.filter(name=items[item]).exists():  # checking if an item with this name already exist
                 print('item containing the name {} already exist'.format(items[item]))
                 return False
             if item == 'content':
-                if len(items[item]) > 1000:
+                if len(items[item]) > 1000:  # checking  content len
                     print('max lenght of the content is 1000 charachters. u wrote {}'.format(len(items[item])))
                     return False
     if db_items > 1:
+        """
+        getting the last created item date
+        """
         date = Items.objects.filter(list_to_do=List.objects.get(
             useraccount=UserAccount.objects.get(email=items['user']))).last().created
         created_date = date.strftime('%Y-%m-%d %H:%M:%S').replace(':', ' ').split('-')
@@ -76,9 +97,11 @@ def add(items):
             intt = int(intt)
             lst.append(intt)
 
+        '''subctracing  current date with the lasdt createf item date'''
         date_minutes = datetime.datetime.now() - datetime.datetime(lst[0], lst[1], lst[2], lst[3], lst[4], lst[5])
         minutes = divmod(date_minutes.total_seconds(), 60)
         # now = datetime.now()
+
         if (db_items == 2):
             if minutes[0] > 30:
                 return True
