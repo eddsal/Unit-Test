@@ -13,8 +13,9 @@ return True or False
 
 def isValid(dictt):
     import re
-
+    print(dictt)
     for i in dictt:
+        print(i)
         if dictt[i] is None or dictt[i] == '':
             print('no value has been set to', i)
             return False
@@ -71,7 +72,6 @@ return bool
 
 def add(items):
     maxItem = 11
-
     db_items = Items.objects.filter(list_to_do=List.objects.get(
         useraccount=UserAccount.objects.get(email=items['user']))).count()  # geeting all the users 'list items
 

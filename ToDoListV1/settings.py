@@ -26,7 +26,7 @@ SECRET_KEY = '7c&w*s0c3a5ey3#8l=q949b3^#6@g%!t3yt^&#=uav$8a#%x&k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['1.0.0.127.in-addr.arpa','127.0.0.1']
 
 
 # Application definition
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'ToDoListV1.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
 
