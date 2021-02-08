@@ -19,9 +19,19 @@ class ApiTestCase(TestCase):
         response = self.client.get(reverse('main:createValidUser'))
         self.failUnlessEqual(response.status_code, 200)
 
+
     def test_create_user(self):
         """
         creation d utilisateur.
         """
         response = self.client.post('/create/user', {'email': "Admidsn@test.com", 'age': '13', 'firstName': 'e', 'lastName': 'e', 'password': 'eeeeeeeeeeeeee'})
+        self.assertEqual(response.status_code, 200)
+
+    
+    def test_create_unvalid_user(self):
+        """
+        creation d unvalid utilisateur.
+        """
+        response = self.client.post('/create/user', {'email': "Admin@test.com", 'age': '11', 'firstName': 'e', 'lastName': 'e', 'password': 'eeeeeeeeeeeeee'})
+        print(response.status_code)
         self.assertEqual(response.status_code, 200)
