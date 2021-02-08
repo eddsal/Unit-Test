@@ -12,10 +12,7 @@ return True or False
 
 
 def isValid(dictt):
-    import re
-    print(dictt)
     for i in dictt:
-        print(i)
         if dictt[i] is None or dictt[i] == '':
             print('no value has been set to', i)
             return False
