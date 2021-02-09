@@ -4,6 +4,7 @@
 from django.test import Client, TestCase
 from django.urls import reverse
 from main.models import UserAccount
+from main.utils import random_char
 
 
 
@@ -47,6 +48,10 @@ class ApiTestCase(TestCase):
     #     """
     #     creation d'une liste.
     #     """
-    #     response = self.client.post('/create/list', {'email':    self.user.email})
+    #     validUser = UserAccount.objects.create(email="{}valid2@test.com".format(random_char(5)), age="23")
+    #     response = self.client.post('/create/list', {'email':   validUser.email, 'listt':'',  'age': '15'})
     #     self.assertEqual(response.status_code, 200)
 
+
+if __name__ == '__main__':
+    unittest.main()

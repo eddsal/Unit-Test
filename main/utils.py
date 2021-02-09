@@ -53,7 +53,6 @@ return bool
 
 def canCreateList(user):
     if user:
-       
         if len(List.objects.filter(useraccount=UserAccount.objects.get(email=user.email))) and  len(List.objects.filter(useraccount=UserAccount.objects.get(email=user.email)))== 1:
             print('cannot create a list for {}, already have a list'.format(user.email))
             return False
@@ -76,7 +75,7 @@ def add(items):
     maxItem = 11
     db_items = Items.objects.filter(list_to_do=List.objects.get(
         useraccount=UserAccount.objects.get(email=items['user']))).count()  # geeting all the users 'list items
-
+    print(items)
     if items:
         for item in items:
             if item == 'name' and Items.objects.filter(name=items[item]).exists():  # checking if an item with this name already exist
@@ -135,4 +134,5 @@ def add(items):
 
     if db_items == 8:
         print('you only can  add 2 more items ')
+   
     return True

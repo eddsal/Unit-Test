@@ -16,6 +16,7 @@ class ListViewTest(unittest.TestCase):
             self.user.listt = List.objects.create(name="TODILIST")
             self.user.save()
 
+
     def test_create_more_thn_one_list(self):
         print('function: test_create_more_thn_one_list')
         self.assertFalse(canCreateList(self.user) == True)
@@ -23,11 +24,13 @@ class ListViewTest(unittest.TestCase):
         print('')
 
     def test_create_list(self):
+        
         print('function: test_create_list')
-        validUser = UserAccount.objects.create(email="{}valid2@test.com".format(random_char(5)), age="23")
+        validUser, created = UserAccount.objects.get_or_create(email="{}valid2@test.com".format(random_char(5)), age="23")
         self.assertTrue(canCreateList(validUser)  == True)
         print('----------------------------')
         print('')
+
 
 if __name__ == '__main__':
     unittest.main()
