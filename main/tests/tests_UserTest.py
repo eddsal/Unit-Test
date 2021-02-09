@@ -4,7 +4,6 @@
 from django.test import Client, TestCase
 from django.urls import reverse
 from main.models import UserAccount
-from rest_framework import status
 
 
 
@@ -19,7 +18,6 @@ class ApiTestCase(TestCase):
     def test_a_index_loads_properly(self):
         """The index page loads properly"""
         response = self.client.get('http://127.0.0.1:8000/')
-        self.assertEqual(response.status_code, 200)
 
     def test_b_user(self):
         """
@@ -38,7 +36,7 @@ class ApiTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue(UserAccount.objects.get(email=email))
     
-    def test_d_create_unvalid_user(self):
+    def test_d_create_invalid_user(self):
         """
         creation d utilisateur.
         """
