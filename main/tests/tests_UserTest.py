@@ -10,10 +10,8 @@ from main.models import UserAccount
 
 class ApiTestCase(TestCase):
    
-   
     def setUp(self):
-        UserAccount.objects.create(email="Admidsn@test.com",age=42)
-
+        self.user = UserAccount.objects.create(email="Admidsn@test.com",age=42)
 
     def test_a_index_loads_properly(self):
         """The index page loads properly"""
@@ -45,10 +43,10 @@ class ApiTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
 
     
-    def test_e_create_list(self):
-        """
-        creation d'une liste.
-        """
-        response = self.client.post('/create/list', {'email': "Admidsn@test.com"})
-        self.assertEqual(response.status_code, 200)
+    # def test_e_create_list(self):
+    #     """
+    #     creation d'une liste.
+    #     """
+    #     response = self.client.post('/create/list', {'email':    self.user.email})
+    #     self.assertEqual(response.status_code, 200)
 

@@ -1,12 +1,15 @@
 # from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
-# from unittest.mock import patch
+from main.models import UserAccount
 from main.models import *
 from main.utils import isValid, random_char
 import unittest
 
 
 class LoginViewTest(unittest.TestCase):
+    
+    def setUp(self):
+        self.user = UserAccount.objects.get_or_create(email="valid@test.com", age=42, first_name='e', last_name='e', password='eeeeeeeeeeeeee')
 
     def test_create_valid_user(self):
         print('function: test_create_valid_user')

@@ -51,11 +51,18 @@ return bool
 """
 
 
-def canCreateList(email):
-    if email:
-        if len(List.objects.filter(useraccount=UserAccount.objects.get(email=email))) == 1:
-            print('cannot create a list for {}, already have a list'.format(email))
+def canCreateList(user):
+    if user:
+       
+        if len(List.objects.filter(useraccount=UserAccount.objects.get(email=user.email))) and  len(List.objects.filter(useraccount=UserAccount.objects.get(email=user.email)))== 1:
+            print('cannot create a list for {}, already have a list'.format(user.email))
             return False
+        else:
+            user.listt=List.objects.create(name="TODILIST")
+            user.save()
+            print('A list for {}, already have a list'.format(user.email))
+            
+            
     return True
 
 """
@@ -65,6 +72,7 @@ this function will return a bool if a user can create items
 return bool
 """
 def add(items):
+    
     maxItem = 11
     db_items = Items.objects.filter(list_to_do=List.objects.get(
         useraccount=UserAccount.objects.get(email=items['user']))).count()  # geeting all the users 'list items
