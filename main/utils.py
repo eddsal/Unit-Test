@@ -53,11 +53,10 @@ return bool
 
 def canCreateList(email):
     if email:
-        if len(List.objects.filter(useraccount=UserAccount.objects.filter(email=email).first())) == 1:
+        if len(List.objects.filter(useraccount=UserAccount.objects.get(email=email))) == 1:
             print('cannot create a list for {}, already have a list'.format(email))
             return False
     return True
-
 
 """
 this function will return a bool if a user can create items
@@ -65,8 +64,6 @@ this function will return a bool if a user can create items
 @param1 = items
 return bool
 """
-
-
 def add(items):
     maxItem = 11
     db_items = Items.objects.filter(list_to_do=List.objects.get(

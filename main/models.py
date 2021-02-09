@@ -12,11 +12,11 @@ class UserAccount(models.Model):
     age = models.IntegerField('age')
     listt = models.ForeignKey('List', null=True, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.email
+    # def __str__(self):
+    #     print('sasasa', self.email)
+    #     return self.email
 
     def save(self, *args, **kwargs):
-
         super(UserAccount, self).save()
 
 

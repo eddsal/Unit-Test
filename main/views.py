@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponse
 from main.models import *
 from main.utils import *
@@ -13,7 +14,6 @@ def index(request):
     context: {}
     return HttpResponse('index Page')
 
-
 @csrf_exempt
 def createValidUser(request):
     if request.method == "POST":
@@ -25,18 +25,28 @@ def createValidUser(request):
             'email' :request.POST['email']
         }
         if isValid(dic):
-            user =  UserAccount.objects.create(
+            user = UserAccount(
                 email=request.POST['email'],
+                age=request.POST['age'],
                 first_name=request.POST['firstName'],
                 last_name=request.POST['lastName'],
                 password=request.POST['password'],
-                age=request.POST['age']
             )
             user.save()
             print('user have been succseful created')
+        else:
+            raise SuspiciousOperation
     return HttpResponse('s')
         
 
 
-
-    
+@csrf_exempt
+def createValidList(request):
+    if request.method == "POST":
+        if canCreateList(request.POST['email']):
+            user = UserAccount.objects.get(email=request.POST['email'])
+            user.listt = List.objects.create(name="TODILIST")
+            user.save()
+            print('user have been succseful created')
+    return HttpResponse('s')
+        
