@@ -75,7 +75,6 @@ def add(items):
     maxItem = 11
     db_items = Items.objects.filter(list_to_do=List.objects.get(
         useraccount=UserAccount.objects.get(email=items['user']))).count()  # geeting all the users 'list items
-    print(items)
     if items:
         for item in items:
             if item == 'name' and Items.objects.filter(name=items[item]).exists():  # checking if an item with this name already exist
@@ -84,7 +83,10 @@ def add(items):
             if item == 'content':
                 if len(items[item]) > 1000:  # checking  content len
                     print('max lenght of the content is 1000 charachters. u wrote {}'.format(len(items[item])))
-                    return False
+           
+        Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
+        useraccount=UserAccount.objects.get(email=items['user'])))
+
     if db_items > 1:
         """
         getting the last created item date

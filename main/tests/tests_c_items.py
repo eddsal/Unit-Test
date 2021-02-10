@@ -18,34 +18,20 @@ class ItemsViewTest(unittest.TestCase):
         print('----------------------------')
         print('')
 
-    # def test_create_item_with_same_name(self):
-    #     print('function: test_create_item_with_same_name')
-    #     allItems = Items.objects.filter(list_to_do=List.objects.get(
-    #                 useraccount=UserAccount.objects.get(email=self.user.email)))
+    def test_create_item_with_same_name(self):
+        print('function: test_create_item_with_same_name')
+        allItems = Items.objects.filter(list_to_do=List.objects.get(
+                    useraccount=UserAccount.objects.get(email=self.user.email)))
+        items = {'name': allItems.last().name, 'content': '', 'user': self.user.email}
+        self.assertFalse(add(items)== True)
 
-    #     print(allItems.last())
-        # items = {'name': allItems.last().name, 'content': '', 'user': self.user.email}
-
-    #      if add(items):
-    #          Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
-    #              useraccount=UserAccount.objects.get(email=UserAccount.objects.first().email)))
-    #      else:
-    #          self.false = add(items)
-    #      self.assertFalse(self.false == True)
-
-    #  def test_30mins_wait(self):
-    #      print('function: test_30mins_wait')
-    #      allItems = Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
-    #          useraccount=UserAccount.objects.get(email=UserAccount.objects.first().email)))
-    #      items = {'name': allItems.last().name, 'content': '', 'user': UserAccount.objects.first().email}
-
-    #      if add(items):
-    #          Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
-    #              useraccount=UserAccount.objects.get(email=UserAccount.objects.first().email)))
-    #     else:
-    #         self.false = add(items)
-    #     self.assertFalse(self.false == True)
-
+    def test_wait_30mins(self):
+        print('function: test_30mins_wait')
+        allItems = Items.objects.filter(list_to_do=List.objects.get(
+                    useraccount=UserAccount.objects.get(email=self.user.email)))
+        items = {'name': random_char(6), 'content': 'test', 'user': self.user.email}
+        self.assertTrue(add(items)== True)
+       
 
 if __name__ == '__main__':
     unittest.main()

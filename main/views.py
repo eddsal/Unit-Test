@@ -31,16 +31,14 @@ def createValidUser(request):
             user.save()
         else:
             raise SuspiciousOperation
-    return HttpResponse('s')
+    return HttpResponse('user has been created successfully')
         
 
 
 @csrf_exempt
 def createValidList(request):
     if request.method == "POST":
-        # print(request.POST['email'])
         user = UserAccount.objects.get(email=request.POST['email'])
-        print(request.POST['email'],user)
         user.listt = List.objects.create(name="TODILIST")
         user.save()
     return HttpResponse('list has been created successfully')
