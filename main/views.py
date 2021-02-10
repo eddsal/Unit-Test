@@ -6,10 +6,6 @@ from main.models import *
 from main.utils import *
 
 
-
-
-
-
 def index(request):
     context: {}
     return HttpResponse('index Page')
@@ -42,10 +38,10 @@ def createValidUser(request):
 @csrf_exempt
 def createValidList(request):
     if request.method == "POST":
-        print(request.POST['email'])
-        canCreateList(request.POST['email'])
-        #     user = UserAccount.objects.get(email=request.POST['email'])
-        #     user.listt = List.objects.create(name="TODILIST")
-        #     user.save()
-    return HttpResponse('s')
+        # print(request.POST['email'])
+        user = UserAccount.objects.get(email=request.POST['email'])
+        print(request.POST['email'],user)
+        user.listt = List.objects.create(name="TODILIST")
+        user.save()
+    return HttpResponse('list has been created successfully')
         

@@ -44,13 +44,13 @@ class ApiTestCase(TestCase):
         self.assertEqual(response.status_code, 400)
 
     
-    # def test_e_create_list(self):
-    #     """
-    #     creation d'une liste.
-    #     """
-    #     validUser = UserAccount.objects.create(email="{}valid2@test.com".format(random_char(5)), age="23")
-    #     response = self.client.post('/create/list', {'email':   validUser.email, 'listt':'',  'age': '15'})
-    #     self.assertEqual(response.status_code, 200)
+    def test_e_create_list(self):
+        """
+        creation d'une liste.
+        """
+        validUser = UserAccount.objects.create(email="{}valid2@test.com".format(random_char(5)), age="23")
+        response = self.client.post('/create/list', {'email':   validUser.email, 'listt':'',  'age': '15'})
+        self.assertEqual(response.status_code, 200)
 
 
 if __name__ == '__main__':
