@@ -37,7 +37,7 @@ class ApiTestCase(TestCase):
     
     def test_d_create_invalid_user(self):
         """
-        creation d utilisateur.
+        creation d utilisateur Invalid.
         """
         email = "Admiaadsn@test.com"
         response = self.client.post('/user/add', {'email':email , 'age': '1', 'firstName': 'e', 'lastName': 'e', 'password': 'eeeeeeeeeeeeee'})
@@ -62,15 +62,13 @@ class ApiTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     
-    def test_get_e_user_list(self):
+    def test_get_e_user_Items(self):
         """
         Get USER ITEMS FROM  Liste.
         """
         validUser, created = UserAccount.objects.get_or_create(email="valid@test.com")
-        response = self.client.post('/user/{}/get/list/items'.format(validUser.id))
-        # self.assertEqual(response.status_code, 200)
-     
-        
+        response = self.client.post('/user/{}/get/list/items/'.format(validUser.id))
+        self.assertEqual(response.status_code, 200)
 
 
 if __name__ == '__main__':

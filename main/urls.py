@@ -11,7 +11,7 @@ urlpatterns = [
     path('user/add/list/item', createValidList, name='createValidList'),
 
     path('user/<int:user_id>/get/list', getValidList, name='getValidList'),
-    # path('user/<int:user_id>/get/list/items/', getValidListItems, name='getValidListItems'),
+    path('user/<int:user_id>/get/list/items/', getValidListItems, name='getValidListItems'),
 
     
 ]

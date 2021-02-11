@@ -55,8 +55,8 @@ def getValidList(request, user_id):
 @csrf_exempt
 def getValidListItems(request, user_id):
     if request.method == "POST":
-        userItems = Items.objects.filter(list_to_do=List.objects.filter(useraccount=user_id)).all()
+        userItems = Items.objects.filter(list_to_do=List.objects.get(
+                    useraccount=user_id))
         print(userItems)
-       
-    # return HttpResponse('list for {}'.format( UserAccount.objects.get(id=user_id).email))
+    return HttpResponse('items for {}'.format( UserAccount.objects.get(id=user_id).email))
 
