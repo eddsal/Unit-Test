@@ -58,4 +58,3 @@ def getValidListItems(request, user_id):
                     useraccount=user_id))
         print(userItems)
     return HttpResponse('items for {}'.format( UserAccount.objects.get(id=user_id).email))
-

@@ -69,6 +69,13 @@ class ApiTestCase(TestCase):
         validUser, created = UserAccount.objects.get_or_create(email="valid@test.com")
         response = self.client.post('/user/{}/get/list/items/'.format(validUser.id))
         self.assertEqual(response.status_code, 200)
+    
+    def test_get_unavlid_route(self):
+        """
+        test_get_unavlid_route
+        """
+        response = self.client.post('/user/unvalid/')
+        self.assertEqual(response.status_code, 404)
 
 
 if __name__ == '__main__':
