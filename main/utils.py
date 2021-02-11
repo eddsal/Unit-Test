@@ -83,9 +83,8 @@ def add(items):
             if item == 'content':
                 if len(items[item]) > 1000:  # checking  content len
                     print('max lenght of the content is 1000 charachters. u wrote {}'.format(len(items[item])))
-           
-        Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
-        useraccount=UserAccount.objects.get(email=items['user'])))
+                    return False
+      
 
     if db_items > 1:
         """
@@ -130,11 +129,14 @@ def add(items):
             else:
                 print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
                 return False
+    
+    Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
+        useraccount=UserAccount.objects.get(email=items['user'])))
+    
     if db_items - maxItem == 0:
         print('max items in your e list have been reached ')
         return False
 
     if db_items == 8:
         print('you only can  add 2 more items ')
-   
     return True

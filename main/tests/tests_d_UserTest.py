@@ -31,7 +31,7 @@ class ApiTestCase(TestCase):
         creation d utilisateur.
         """
         email = "Admivdsn@test.com"
-        response = self.client.post('/create/user', {'email':email , 'age': '13', 'firstName': 'e', 'lastName': 'e', 'password': 'eeeeeeeeeeeeee'})
+        response = self.client.post('/user/add', {'email':email , 'age': '13', 'firstName': 'e', 'lastName': 'e', 'password': 'eeeeeeeeeeeeee'})
         self.assertEqual(response.status_code, 200)
         self.assertTrue(UserAccount.objects.get(email=email))
     
@@ -40,7 +40,7 @@ class ApiTestCase(TestCase):
         creation d utilisateur.
         """
         email = "Admiaadsn@test.com"
-        response = self.client.post('/create/user', {'email':email , 'age': '1', 'firstName': 'e', 'lastName': 'e', 'password': 'eeeeeeeeeeeeee'})
+        response = self.client.post('/user/add', {'email':email , 'age': '1', 'firstName': 'e', 'lastName': 'e', 'password': 'eeeeeeeeeeeeee'})
         self.assertEqual(response.status_code, 400)
 
     
@@ -49,8 +49,28 @@ class ApiTestCase(TestCase):
         creation d'une liste.
         """
         validUser = UserAccount.objects.create(email="{}valid2@test.com".format(random_char(5)), age="23")
-        response = self.client.post('/create/list', {'email':   validUser.email, 'listt':'',  'age': '15'})
+        response = self.client.post('/user/add/list', {'email':   validUser.email, 'listt':'',  'age': '15'})
         self.assertEqual(response.status_code, 200)
+
+
+    def test_get_e_user_list(self):
+        """
+        Get USER Liste.
+        """
+        validUser, created = UserAccount.objects.get_or_create(email="valid@test.com")
+        response = self.client.post('/user/{}/get/list'.format(validUser.id))
+        self.assertEqual(response.status_code, 200)
+
+    
+    def test_get_e_user_list(self):
+        """
+        Get USER ITEMS FROM  Liste.
+        """
+        validUser, created = UserAccount.objects.get_or_create(email="valid@test.com")
+        response = self.client.post('/user/{}/get/list/items'.format(validUser.id))
+        # self.assertEqual(response.status_code, 200)
+     
+        
 
 
 if __name__ == '__main__':

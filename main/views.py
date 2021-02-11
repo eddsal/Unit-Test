@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import SuspiciousOperation
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from rest_framework.exceptions import ValidationError
 from main.models import *
 from main.utils import *
-
 
 def index(request):
     context: {}
@@ -34,7 +34,6 @@ def createValidUser(request):
     return HttpResponse('user has been created successfully')
         
 
-
 @csrf_exempt
 def createValidList(request):
     if request.method == "POST":
@@ -43,3 +42,21 @@ def createValidList(request):
         user.save()
     return HttpResponse('list has been created successfully')
         
+
+@csrf_exempt
+def getValidList(request, user_id):
+    if request.method == "POST":
+        userlist = List.objects.filter(useraccount=user_id)
+        if len(userlist) > 1:
+            ValidationError('you cannot have more thn 1 list')
+    return HttpResponse('list for {}'.format( UserAccount.objects.get(id=user_id).email))
+
+
+@csrf_exempt
+def getValidListItems(request, user_id):
+    if request.method == "POST":
+        userItems = Items.objects.filter(list_to_do=List.objects.filter(useraccount=user_id)).all()
+        print(userItems)
+       
+    # return HttpResponse('list for {}'.format( UserAccount.objects.get(id=user_id).email))
+
