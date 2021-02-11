@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponse, JsonResponse
-from rest_framework.exceptions import ValidationError
 from main.models import *
 from main.utils import *
 
@@ -48,7 +47,7 @@ def getValidList(request, user_id):
     if request.method == "POST":
         userlist = List.objects.filter(useraccount=user_id)
         if len(userlist) > 1:
-            ValidationError('you cannot have more thn 1 list')
+            SuspiciousOperation('you cannot have more thn 1 list')
     return HttpResponse('list for {}'.format( UserAccount.objects.get(id=user_id).email))
 
 
