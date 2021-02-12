@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import SuspiciousOperation
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseForbidden
 from main.models import *
 from main.utils import *
 
@@ -40,8 +40,17 @@ def createValidList(request):
         user.listt = List.objects.create(name="TODILIST")
         user.save()
     return HttpResponse('list has been created successfully')
-        
 
+
+@csrf_exempt
+def createValidListItem(request):
+    if request.method == "POST":
+        items = {'name':request.POST['name'], 'content': request.POST['content'], 'user':  request.POST['email']}
+        if add(items):
+            return HttpResponse('list has been created successfully')
+        return HttpResponseBadRequest('list cannot b created')
+
+        
 @csrf_exempt
 def getValidList(request, user_id):
     if request.method == "POST":

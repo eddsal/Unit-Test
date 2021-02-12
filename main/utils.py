@@ -106,12 +106,16 @@ def add(items):
 
         if (db_items == 2):
             if minutes[0] > 30:
+                Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
+        useraccount=UserAccount.objects.get(email=items['user'])))
                 return True
             else:
                 print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
                 return False
         elif (db_items == 4):
             if minutes[0] > 30:
+                Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
+        useraccount=UserAccount.objects.get(email=items['user'])))
                 return True
             else:
                 print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
@@ -119,12 +123,16 @@ def add(items):
         elif (db_items == 6):
 
             if minutes[0] > 30:
+                Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
+        useraccount=UserAccount.objects.get(email=items['user'])))
                 return True
             else:
                 print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
                 return False
         elif (db_items == 8):
             if minutes[0] > 30:
+                Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
+        useraccount=UserAccount.objects.get(email=items['user'])))
                 return True
             else:
                 print('u created two items in less thn 30 mins, you have to wait {} more minutes'.format(30 - minutes[0]))
@@ -132,6 +140,7 @@ def add(items):
     
     Items.objects.create(name=items['name'], content=items['content'], list_to_do=List.objects.get(
         useraccount=UserAccount.objects.get(email=items['user'])))
+ 
     
     if db_items - maxItem == 0:
         print('max items in your e list have been reached ')

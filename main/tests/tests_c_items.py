@@ -36,6 +36,5 @@ class ItemsViewTest(unittest.TestCase):
         print('----------------------------')
         print('')
        
-
 if __name__ == '__main__':
     unittest.main()
